@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Style from './AmortisationSchedule.module.css';
 
-const AmortisationSchedule = () => {
+const AmortisationSchedule = (props) => {
   return (
     <div>
-      {/* Todo: Show below table conditionally (only once result data is available) */}
-      {/* Show fallback text if no data is available */}
-
       <table className={Style['result']}>
-        <thead>
+        <thead className={Style['result thead']}>
           <tr>
             <th>Year</th>
             <th>Total Savings</th>
@@ -17,14 +14,16 @@ const AmortisationSchedule = () => {
             <th>Invested Capital</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>YEAR NUMBER</td>
-            <td>TOTAL SAVINGS END OF YEAR</td>
-            <td>INTEREST GAINED IN YEAR</td>
-            <td>TOTAL INTEREST GAINED</td>
-            <td>TOTAL INVESTED CAPITAL</td>
-          </tr>
+        <tbody className={Style['result tbody']}>
+          {props.yearlyData.map((periodData) => (
+            <tr key={periodData.year}>
+              <td>{periodData.year}</td>
+              <td>{periodData.savingsEndOfYear}</td>
+              <td>{periodData.yearlyInterest}</td>
+              <td>{periodData.yearlyContribution}</td>
+              <td>{periodData.savingsEndOfYear - periodData.yearlyInterest}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
