@@ -13,8 +13,3 @@ body {
   background: radial-gradient(#303b37, #1a1f1d);
   color: #e1eeeb;
 }
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
-}

@@ -1,4 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
 .form {
+  display: flex;
+  flex-direction: column;
+  -ms-flex-align: right;
   padding: 1rem;
   max-width: 30rem;
   margin: 2rem auto;
@@ -9,6 +21,7 @@
 .input-group {
   display: flex;
   justify-content: space-evenly;
+  flex-direction: row;
   gap: 1.5rem;
 }
 
@@ -16,7 +29,7 @@
   display: block;
   margin-bottom: 0.25rem;
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -31,17 +44,29 @@
   font-size: 1rem;
 }
 
+.input-group.invalid label {
+  color: red;
+  font-size: 1rem;
+}
+
+.input-group.invalid input {
+  border-color: red;
+  border-width: 1px;
+}
+
 .actions {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  gap: 1rem;
+  gap: 3rem;
 }
 
 .button {
+  font-family: 'Roboto Condensed', sans-serif;
   padding: 0.5rem 1rem;
-  border: none;
+  border: 1px solid #c076a2;
   border-radius: 0.25rem;
-  background: linear-gradient(180deg, #1f584b, #17493d);
+  background: linear-gradient(180deg, #12a882, #251a56);
   color: #c2e9e0;
   font-family: 'Roboto Condensed', sans-serif;
   cursor: pointer;
@@ -49,8 +74,10 @@
 
 .buttonAlt {
   font-family: 'Roboto Condensed', sans-serif;
-  border: none;
-  background: transparent;
+  padding: 0.5rem 1rem;
+  border: 1px solid #6d5564;
+  border-radius: 0.25rem;
+  background: linear-gradient(180deg, #30b394, #184d1e);
   color: #c2e9e0;
   cursor: pointer;
 }
