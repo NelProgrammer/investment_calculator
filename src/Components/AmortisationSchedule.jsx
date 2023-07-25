@@ -2,47 +2,18 @@ import React, { useState } from 'react';
 import Style from './AmortisationSchedule.module.css';
 
 const AmortisationSchedule = (props) => {
-  const [yearlyData, setYearlyData] = useState([]);
+  const [tableRowsData, setTableRowsData] = useState(props.yearlyData);
 
-  const getYearlyData = () => {
-    let yearlyData = [];
-    const userInput = props.userInput;
-    let currentSavings = +userInput.currentSavings;
-    const yearlyContribution = +userInput.yearlyContribution;
-    const expectedReturn = +userInput.expectedReturn / 100;
-    const duration = +userInput.duration;
-
-    for (let i = 0; i < duration; i++) {
-      const yearlyInterest = currentSavings * expectedReturn;
-      currentSavings += yearlyInterest + yearlyContribution;
-      let calcData = {
-        year: i + 1,
-        yearlyInterest: yearlyInterest,
-        savingsEndOfYear: currentSavings,
-        yearlyContribution: yearlyContribution,
-      };
-      yearlyData.push(calcData);
-      //setYearlyData((prevData) => [...prevData, calcData]);
-    }
-    return yearlyData;
+  const updateTableBody = () => {
+    setTableRowsData(tableRowsData);
   };
 
-  //setYearlyData(getYearlyData);
-  const tBody = getYearlyData().map((periodData) => (
-    <tr key={periodData.year}>
-      <td>{periodData.year}</td>
-      <td>{periodData.savingsEndOfYear}</td>
-      <td>{periodData.yearlyInterest}</td>
-      <td>{periodData.savingsEndOfYear + periodData.yearlyInterest}</td>
-      <td>{periodData.yearlyContribution}</td>
-    </tr>
-  ));
   return (
     <div>
-      {tBody === undefined && (
+      {tableRowsData.length <= 0 && (
         <h3 className={Style['no-data']}>No Amortisation Data Available</h3>
       )}
-      {tBody.length > 0 && (
+      {tableRowsData.length > 0 && (
         <table className={Style['result']}>
           <thead className={Style['result thead']}>
             <tr>
@@ -53,7 +24,37 @@ const AmortisationSchedule = (props) => {
               <th>Invested Capital</th>
             </tr>
           </thead>
-          <tbody className={Style['result tbody']}>{tBody}</tbody>
+          <tbody className={Style['result tbody']}>
+            {tableRowsData.map((periodData) => (
+              <tr key={periodData.year}>
+                <td>{periodData.year}</td>
+                <td>
+                  {periodData.savingsEndOfYear.toLocaleString('en-za', {
+                    style: 'currency',
+                    currency: 'ZAR',
+                  })}
+                </td>
+                <td>
+                  {periodData.yearlyInterest.toLocaleString('en-za', {
+                    style: 'currency',
+                    currency: 'ZAR',
+                  })}
+                </td>
+                <td>
+                  {periodData.totalInterest.toLocaleString('en-za', {
+                    style: 'currency',
+                    currency: 'ZAR',
+                  })}
+                </td>
+                <td>
+                  {periodData.totalCumulative.toLocaleString('en-za', {
+                    style: 'currency',
+                    currency: 'ZAR',
+                  })}
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       )}
     </div>
