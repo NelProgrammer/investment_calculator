@@ -158,7 +158,7 @@ const InputForm = (props) => {
   return (
     <div className={Style['container']}>
       <form className={Style['form']} onSubmit={handleFormSubmit}>
-        <div className="input-div">
+        <div className={Style['input-div']}>
           <p
             className={`${Style['input-group']} ${
               errorLocation.enteredCurrentSavings == true && Style.invalid
@@ -184,7 +184,7 @@ const InputForm = (props) => {
             />
           </p>
         </div>
-        <div className="input-div">
+        <div className={Style['input-div']}>
           <p
             className={`${Style['input-group']} ${
               errorLocation.enteredReturn == true && Style.invalid

@@ -18,7 +18,7 @@
   background: linear-gradient(180deg, #307e6c, #2b996d);
 }
 
-div {
+.input-div {
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
